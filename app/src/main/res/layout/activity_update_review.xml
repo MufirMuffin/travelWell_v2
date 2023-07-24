@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".UpdateReview"
+    android:background="@drawable/background_4">
+
+    <ImageView
+        android:id="@+id/ImgViewPlaceReview"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dutch_square"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        />
+
+    <TextView
+        android:id="@+id/TxtViewPlaceReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ImgViewPlaceReview"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="Place Name"
+        android:gravity="center_horizontal"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TxtViewPlaceReview"
+        android:layout_marginTop="16dp"
+        android:numStars="5"
+        android:stepSize="1"
+        android:rating="0"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/commentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/ratingBar"
+        android:layout_marginTop="16dp"
+        android:hint="Enter your comment..."
+        android:inputType="textMultiLine"
+        android:maxLines="4"
+        android:gravity="start"/>
+
+    <Button
+        android:id="@+id/submitReviewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commentEditText"
+        android:layout_marginTop="16dp"
+        android:text="Submit Review"
+        android:textColor="@android:color/white"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/titleupdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Review"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:textAlignment="center"
+
+        />
+
+</RelativeLayout>

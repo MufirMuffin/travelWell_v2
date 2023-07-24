@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/policeImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/baseline_local_police_24"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/policeNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:text="Name of Police Station"
+            android:layout_toRightOf="@+id/policeImageView"/>
+
+        <TextView
+            android:id="@+id/policeDescTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/policeNameTextView"
+            android:layout_toRightOf="@+id/policeImageView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="17dp"
+            android:text="Description of Police Station"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</LinearLayout>

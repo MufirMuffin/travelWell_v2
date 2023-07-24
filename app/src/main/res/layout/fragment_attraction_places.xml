@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AttractionPlacesFragment"
+    android:background="@drawable/background_3">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/logo_travelwell"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_1"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:text="Welcome," />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:text="User"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/text_1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:orientation="horizontal"
+        android:id="@+id/ly2"
+        android:layout_below="@+id/logo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Attraction Places"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:textSize="20dp"
+            android:layout_marginStart="22dp"/>
+
+        <Button
+            android:id="@+id/mapViewButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="Map View"
+            android:textSize="12sp"
+            android:layout_marginEnd="6dp"/>
+
+        <Button
+            android:id="@+id/getLocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="Get Location"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_below="@+id/ly2">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:id="@+id/listPlaces"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            tools:listitem="@layout/list_item_place"/>
+
+        <Button
+            android:id="@+id/emergencyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency Services"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

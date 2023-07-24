@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PolicesInfo"
+    android:padding="16dp"
+    android:background="@drawable/background_4">
+
+    <ImageView
+        android:id="@+id/policeImgView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/policeNameTxtView"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dutch_square" />
+
+    <TextView
+        android:id="@+id/policeNameTxtView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Police Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/policeDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Police Description"
+        android:textSize="16sp"
+        android:layout_below="@+id/policeNameTxtView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/policeNumberTextView"
+        android:gravity="center"
+        android:layout_below="@+id/policeDescriptionTextView"
+        android:text="Police Number"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/policeLatitudeTextView"
+        android:gravity="center"
+        android:text="Police Latitude"
+        android:textSize="16sp"
+        android:layout_below="@+id/policeDescriptionTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/policeLongitudeTextView"
+        android:gravity="center"
+        android:text="Police Longitude"
+        android:textSize="16sp"
+        android:layout_below="@+id/policeLatitudeTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/policeUpdateButton"
+        android:layout_above="@+id/policeDeleteButton"
+        android:layout_centerHorizontal="true"
+        android:text="Update Police Station"
+        android:backgroundTint="@color/green"
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:id="@+id/policeDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Delete Police Station"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="12dp" />
+
+</RelativeLayout>

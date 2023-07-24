@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlacesInfo"
+    android:padding="16dp"
+    android:background="@drawable/background_4">
+
+    <ImageView
+        android:id="@+id/placeImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dutch_square"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/placeNameTextView" />
+
+    <TextView
+        android:id="@+id/placeNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Place Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/placeDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Place Description"
+        android:textSize="16sp"
+        android:layout_below="@+id/placeNameTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/placeLatitudeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Place Latitude"
+        android:textSize="16sp"
+        android:layout_below="@+id/placeDescriptionTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/placeLongitudeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Place Longitude"
+        android:textSize="16sp"
+        android:layout_below="@+id/placeLatitudeTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/placeUpdateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/placeDeleteButton"
+        android:layout_centerHorizontal="true"
+        android:text="Update Place"
+        android:backgroundTint="@color/green"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/placeDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Delete Place"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="8dp" />
+
+</RelativeLayout>

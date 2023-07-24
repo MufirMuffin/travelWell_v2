@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".userPolicesInfo"
+    android:padding="16dp"
+    android:background="@drawable/background_4">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:id="@+id/ImgViewPolice"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dutch_square"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TxtViewPoliceName"
+        android:gravity="center"
+        android:text="Police Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ImgViewPolice"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TxtViewPoliceDescription"
+        android:gravity="center"
+        android:text="Police Description"
+        android:textSize="16sp"
+        android:layout_below="@+id/TxtViewPoliceName"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TxtViewPoliceNumber"
+        android:gravity="center"
+        android:layout_below="@+id/TxtViewPoliceDescription"
+        android:text="Police Number"
+        android:background="@drawable/white_background"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="8dp"/>
+
+    <com.google.android.gms.maps.MapView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/userPoliceMapView"
+        android:layout_below="@+id/TxtViewPoliceNumber"
+        android:layout_marginTop="16dp"
+        app:liteMode="true"
+        map:mapType="normal"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/BtnPoliceCall"
+        android:layout_below="@+id/userPoliceMapView"
+        android:layout_centerHorizontal="true"
+        android:text="Call Police Station"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="12dp"/>
+
+</RelativeLayout>

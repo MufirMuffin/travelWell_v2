@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ReviewplaceImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/dutch_square"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/ReviewplaceNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:text="Name of Place"
+            android:layout_toRightOf="@+id/ReviewplaceImageView"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ReviewplaceNameTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/ReviewplaceImageView"
+            android:text="Click to review"/>
+
+    </RelativeLayout>
+</LinearLayout>
