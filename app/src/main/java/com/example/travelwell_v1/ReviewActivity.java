@@ -1,5 +1,6 @@
 package com.example.travelwell_v1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -27,19 +28,19 @@ public class ReviewActivity extends AppCompatActivity {
     private TextView placeNameTextView;
     private RatingBar ratingBar;
     private EditText commentEditText;
-    private Button submitReviewButton;
+    private Button submitReviewButton, deleteReviewButton;
     private DatabaseReference reviewsRef;
-    private String placeKey;
+    private String placeID;
     private SharedPreferences sharedPreferences;
+    private Review review; // Store the review object
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-        // Initialize Database
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        reviewsRef = firebaseDatabase.getReference("reviews");
+        // Initialize Database for review
+        reviewsRef = FirebaseDatabase.getInstance().getReference("reviews");
 
         sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE);
 
@@ -49,130 +50,71 @@ public class ReviewActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         commentEditText = findViewById(R.id.commentEditText);
         submitReviewButton = findViewById(R.id.submitReviewButton);
+        //TextView textViewPlaceID = findViewById(R.id.textViewPlaceID);
+        deleteReviewButton = findViewById(R.id.deleteReviewButton);
 
         // Retrieve data from intent
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String placeName = extras.getString("placeName");
-            String imageURL = extras.getString("imageURL");
-            placeKey = extras.getString("placeKey");
+        Intent intent = getIntent();
+        String userID = intent.getStringExtra("userID");
+        int rating = intent.getIntExtra("rating", 0);
+        String comment = intent.getStringExtra("comment");
 
-            // Set data to views
-            placeNameTextView.setText(placeName);
-            Picasso.get().load(imageURL).into(ImgViewPlaceReview);
+        // Set the initial rating and comment
+        ratingBar.setRating(rating);
+        commentEditText.setText(comment);
 
-            // Check if the user has already reviewed the place and fetch the review
-            String userId = sharedPreferences.getString("loggedInUserId", "");
-            if (!userId.isEmpty()) {
-                fetchUserReview(userId, placeKey);
+        // Get the user's review reference to retrieve the placeID
+        reviewsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot placeSnapshot : dataSnapshot.getChildren()) {
+
+                    for (DataSnapshot reviewSnapshot : placeSnapshot.getChildren()) {
+                        Review review = reviewSnapshot.getValue(Review.class);
+
+                        // Check if the review matches the given comment, rating, and userID
+                        if (review != null &&
+                                review.getComment().equals(comment) &&
+                                review.getRating() == rating &&
+                                review.getUserID().equals(userID)) {
+                            placeID = placeSnapshot.getKey(); // Assign the value to the class-level variable
+                            // Here, placeID will contain the dynamically retrieved placeID for "A Famosa"
+                            // You can use the placeID as needed (e.g., show it in a TextView)
+                            //textViewPlaceID.setText(placeID);
+                            fetchPlaceDetails(placeID);
+                            return; // Stop further iteration since we found the review
+                        }
+                    }
+                }
+                // Handle the case when the review does not exist for the given criteria
+                Toast.makeText(ReviewActivity.this, "Review not found for the given criteria", Toast.LENGTH_SHORT).show();
             }
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ReviewActivity.this, "Error fetching reviews: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Handle submit button click
         submitReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitReview();
+                updateReview(userID, rating);
+            }
+        });
+
+        deleteReviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteReview(userID);
             }
         });
     }
 
-    private void submitReview() {
-        // Get the selected rating and comment
-        int rating = Math.round(ratingBar.getRating());
-        String comment = commentEditText.getText().toString().trim();
-
-        // Validate the review
-        if (rating == 0) {
-            Toast.makeText(this, "Please rate the place", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (comment.isEmpty()) {
-            Toast.makeText(this, "Please enter your comment", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Get the current user ID
-        String userId = sharedPreferences.getString("loggedInUserId", "");
-        if (userId.isEmpty()) {
-            Toast.makeText(this, "User ID not found", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Check if the user has already reviewed the place
-        checkUserReviewedPlace(userId, placeKey, new ReviewCheckListener() {
-            @Override
-            public void onReviewCheckResult(boolean hasReviewed) {
-                if (hasReviewed) {
-                    // User has already reviewed the place, update the existing review
-                    updateReview(userId, rating, comment);
-                } else {
-                    // User has not reviewed the place, submit a new review
-                    submitNewReview(userId, rating, comment);
-                }
-            }
-        });
-    }
-
-    private void checkUserReviewedPlace(String userId, String placeKey, final ReviewCheckListener listener) {
-        Query query = reviewsRef.child(placeKey).orderByChild("userID").equalTo(userId);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean hasReviewed = dataSnapshot.exists();
-                listener.onReviewCheckResult(hasReviewed);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error case
-                listener.onReviewCheckResult(false);
-            }
-        });
-    }
-    private interface ReviewCheckListener {
-        void onReviewCheckResult(boolean hasReviewed);
-    }
-    private void fetchUserReview(String userId, String placeKey) {
-        Query query = reviewsRef.child(placeKey).orderByChild("userID").equalTo(userId);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // User has already reviewed the place, fetch the review and display it
-                    for (DataSnapshot reviewSnapshot : dataSnapshot.getChildren()) {
-                        Review review = reviewSnapshot.getValue(Review.class);
-                        if (review != null) {
-                            ratingBar.setRating(review.getRating());
-                            commentEditText.setText(review.getComment());
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error case
-            }
-        });
-    }
-
-    private void submitNewReview(String userId, int rating, String comment) {
-        // Create a new review object
-        Review review = new Review(userId, rating, comment);
-
-        // Save the review to the database
-        reviewsRef.child(placeKey).push().setValue(review);
-
-        // Show a success message
-        Toast.makeText(ReviewActivity.this, "Review submitted successfully", Toast.LENGTH_SHORT).show();
-
-        // Finish the activity
-        finish();
-    }
-    private void updateReview(String userId, int rating, String comment) {
-        // Get the reference to the user's existing review
-        Query query = reviewsRef.child(placeKey).orderByChild("userID").equalTo(userId);
+    private void updateReview(String userId, int rating) {
+        // Get the user's existing review reference
+        Query query = reviewsRef.child(placeID).orderByChild("userID").equalTo(userId);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -181,8 +123,8 @@ public class ReviewActivity extends AppCompatActivity {
                     for (DataSnapshot reviewSnapshot : dataSnapshot.getChildren()) {
                         String reviewKey = reviewSnapshot.getKey();
                         if (reviewKey != null) {
-                            reviewsRef.child(placeKey).child(reviewKey).child("rating").setValue(rating);
-                            reviewsRef.child(placeKey).child(reviewKey).child("comment").setValue(comment);
+                            reviewsRef.child(placeID).child(reviewKey).child("rating").setValue(rating);
+                            reviewsRef.child(placeID).child(reviewKey).child("comment").setValue(commentEditText.getText().toString());
                         }
                     }
 
@@ -191,12 +133,76 @@ public class ReviewActivity extends AppCompatActivity {
 
                     // Finish the activity
                     finish();
+                } else {
+                    // Handle the case when the review does not exist for the user
+                    Toast.makeText(ReviewActivity.this, "Review not found for the user", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle the error case
+                Toast.makeText(ReviewActivity.this, "Error updating review: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private void fetchPlaceDetails(String placeID) {
+        DatabaseReference placesRef = FirebaseDatabase.getInstance().getReference("places");
+        placesRef.child(placeID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Places place = dataSnapshot.getValue(Places.class);
+                    if (place != null) {
+                        Picasso.get().load(place.getImageURL()).into(ImgViewPlaceReview);
+                        // Set the name of the place to placeNameTextView
+                        placeNameTextView.setText(place.getName());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Rest of the code remains the same
+                Toast.makeText(ReviewActivity.this, "Error fetching place details: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    // Method to delete the selected review
+    private void deleteReview(String userId) {
+        // Get the user's existing review reference
+        Query query = reviewsRef.child(placeID).orderByChild("userID").equalTo(userId);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Delete the review
+                    for (DataSnapshot reviewSnapshot : dataSnapshot.getChildren()) {
+                        String reviewKey = reviewSnapshot.getKey();
+                        if (reviewKey != null) {
+                            reviewsRef.child(placeID).child(reviewKey).removeValue();
+                        }
+                    }
+
+                    // Show a success message
+                    Toast.makeText(ReviewActivity.this, "Review deleted successfully", Toast.LENGTH_SHORT).show();
+
+                    // Finish the activity
+                    finish();
+                } else {
+                    // Handle the case when the review does not exist for the user
+                    Toast.makeText(ReviewActivity.this, "Review not found for the user", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error case
+                Toast.makeText(ReviewActivity.this, "Error deleting review: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

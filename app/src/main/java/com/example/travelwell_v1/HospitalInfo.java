@@ -40,8 +40,11 @@ public class HospitalInfo extends AppCompatActivity {
         TextView hospitalNameTextView = findViewById(R.id.hospitalNameTextView);
         TextView hospitalDescriptionTextView = findViewById(R.id.hospitalDescriptionTextView);
         TextView hospitalNumberTextView = findViewById(R.id.hospitalNumberTextView);
+        TextView hospitalLatitudeTextView = findViewById(R.id.hospitalLatitudeTextView);
+        TextView hospitalLongitudeTextView = findViewById(R.id.hospitalLongitudeTextView);
         Button hospitalDeleteButton = findViewById(R.id.hospitalDeleteButton);
         ImageView hospitalImageView = findViewById(R.id.hospitalImageView);
+        Button hospitalUpdateButton = findViewById(R.id.hospitalUpdateButton);
 
         hospitalNameTextView.setText(hospitalName);
         hospitalDescriptionTextView.setText(hospitalDescription);
@@ -49,6 +52,31 @@ public class HospitalInfo extends AppCompatActivity {
 
         Picasso.get().load(hospitalImage).into(hospitalImageView);
 
+        DatabaseReference HRef = FirebaseDatabase.getInstance().getReference().child("hospitals");
+
+        HRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot hospitalSnapshot : snapshot.getChildren()){
+                    String key = hospitalSnapshot.getKey();
+                    Double latitudeDouble = hospitalSnapshot.child("latitude").getValue(Double.class);
+                    Double longitudeDouble = hospitalSnapshot.child("longitude").getValue(Double.class);
+                    String latitude = String.valueOf(latitudeDouble);
+                    String longitude = String.valueOf(longitudeDouble);
+
+                    if (key.equals(hospitalKey)){
+                        hospitalLatitudeTextView.setText(latitude);
+                        hospitalLongitudeTextView.setText(longitude);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         hospitalDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +109,22 @@ public class HospitalInfo extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        hospitalUpdateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent updateIntent = new Intent(HospitalInfo.this, UpdateHospitalActivity.class);
+                updateIntent.putExtra("hospitalKey", hospitalKey);
+                updateIntent.putExtra("hospitalName", hospitalName);
+                updateIntent.putExtra("hospitalDescription",hospitalDescription);
+                updateIntent.putExtra("hospitalNumber", hospitalNumber);
+                updateIntent.putExtra("hospitalImage",hospitalImage);
+                updateIntent.putExtra("hospitalLatitude",hospitalLatitudeTextView.getText().toString());
+                updateIntent.putExtra("hospitalLongitude",hospitalLongitudeTextView.getText().toString());
+
+                startActivity(updateIntent);
             }
         });
     }

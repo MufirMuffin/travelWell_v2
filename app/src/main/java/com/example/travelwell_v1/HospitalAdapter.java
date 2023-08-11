@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 public class HospitalAdapter extends BaseAdapter {
     private Context context;
@@ -47,11 +48,13 @@ public class HospitalAdapter extends BaseAdapter {
         ImageView hospitalImageView = convertView.findViewById(R.id.hospitalImageView);
         TextView hospitalNameTextView = convertView.findViewById(R.id.hospitalNameTextView);
         TextView hospitalDescTextView = convertView.findViewById(R.id.hospitalDescTextView);
+        TextView distanceTextView = convertView.findViewById(R.id.distanceTextView); // Add this line for the distance
 
         // Set the data to the views
         Picasso.get().load(hospital.getImage()).into(hospitalImageView);
         hospitalNameTextView.setText(hospital.getName());
         hospitalDescTextView.setText(hospital.getDescription());
+        distanceTextView.setText(String.format(Locale.getDefault(), "%.2f km", hospital.getDistance())); // Set the distance with formatting
 
         return convertView;
     }

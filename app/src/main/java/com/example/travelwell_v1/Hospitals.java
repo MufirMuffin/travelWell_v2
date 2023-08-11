@@ -7,7 +7,7 @@ public class Hospitals {
     private String image;
     private double latitude;
     private double longitude;
-
+    private double distance; // Add a field for the distance
     public Hospitals() {
     }
 
@@ -68,5 +68,13 @@ public class Hospitals {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

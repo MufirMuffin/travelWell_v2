@@ -47,6 +47,7 @@
         android:layout_below="@+id/logo">
 
         <TextView
+            android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,27 +58,16 @@
             android:layout_marginStart="22dp"/>
 
         <Button
-            android:id="@+id/mapViewButton"
+            android:id="@+id/emergencyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Emergency Services"
+            android:textSize="15sp"
+            android:layout_marginEnd="10dp"
             android:layout_gravity="center"
-            android:padding="8dp"
-            android:text="Map View"
-            android:textSize="12sp"
-            android:layout_marginEnd="6dp"/>
-
-        <Button
-            android:id="@+id/getLocationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="8dp"
-            android:text="Get Location"
-            android:textSize="12sp" />
+             />
 
     </LinearLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,14 +87,7 @@
             android:paddingBottom="8dp"
             tools:listitem="@layout/list_item_place"/>
 
-        <Button
-            android:id="@+id/emergencyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Emergency Services"
-            android:textSize="16sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp" />
+
     </LinearLayout>
 
 

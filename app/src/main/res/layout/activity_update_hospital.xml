@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateHospitalActivity"
+    android:padding="8dp"
+    android:background="@drawable/background_3">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/updateHospitalImageView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="Update Hospital Station"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/updateHospitalImageView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dutch_square"
+        android:layout_above="@+id/updateHospitalNameEditText" />
+
+    <EditText
+        android:id="@+id/updateHospitalNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Hospital Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/updateHospitalDescriptionEditText"
+        android:gravity="center"
+        android:text="Hospital Description"
+        android:textSize="16sp"
+        android:layout_below="@+id/updateHospitalNameEditText"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <EditText
+        android:id="@+id/updateHospitalLatitudeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Hospital Latitude"
+        android:textSize="16sp"
+        android:layout_below="@+id/updateHospitalDescriptionEditText"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <EditText
+        android:id="@+id/updateHospitalLongitudeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Hospital Longitude"
+        android:textSize="16sp"
+        android:layout_below="@+id/updateHospitalLatitudeEditText"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/updateHospitalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:backgroundTint="@color/green"
+        android:layout_marginBottom="12dp"/>
+</RelativeLayout>

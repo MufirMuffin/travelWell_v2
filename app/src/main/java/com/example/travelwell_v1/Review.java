@@ -3,6 +3,7 @@ package com.example.travelwell_v1;
 import java.io.Serializable;
 
 public class Review implements Serializable {
+    private String reviewID;
     private String placeID;
     private String userID;
     private int rating;
@@ -52,5 +53,13 @@ public class Review implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getReviewID() {
+        return reviewID;
+    }
+
+    public void setReviewID(String reviewID) {
+        this.reviewID = reviewID;
     }
 }

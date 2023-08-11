@@ -36,7 +36,19 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="17dp"
             android:text="Description of Police Station"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/distanceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/policeDescTextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/policeImageView"
+            android:text="KM"
+            android:textColor="@color/black"
+            android:textSize="12sp" /> <!-- Light gray color for the distance -->
 
     </RelativeLayout>
 </LinearLayout>

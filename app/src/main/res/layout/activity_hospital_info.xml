@@ -39,7 +39,7 @@
         android:layout_below="@+id/hospitalNameTextView"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/white_background"
         android:padding="8dp"/>
 
@@ -52,9 +52,45 @@
         android:text="Hospital Number"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/white_background"
         android:padding="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hospitalLatitudeTextView"
+        android:gravity="center"
+        android:layout_below="@+id/hospitalNumberTextView"
+        android:text="Hospital Latitude"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hospitalLongitudeTextView"
+        android:gravity="center"
+        android:layout_below="@+id/hospitalLatitudeTextView"
+        android:text="Hospital Latitude"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/white_background"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/hospitalUpdateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/hospitalDeleteButton"
+        android:layout_centerHorizontal="true"
+        android:text="Update Hospital"
+        android:backgroundTint="@color/green"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/hospitalDeleteButton"
@@ -64,6 +100,6 @@
         android:layout_centerHorizontal="true"
         android:text="Delete Hospital"
         android:backgroundTint="@color/red"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>

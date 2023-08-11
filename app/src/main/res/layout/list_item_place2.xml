@@ -36,7 +36,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:text="Description of Place"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/placeDistanceTextView"
@@ -47,19 +47,20 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:text="Distance of Place (KM) "
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/totalRatingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_star_24"
+            android:drawableRight="@drawable/baseline_star_24"
             android:layout_below="@+id/placeDistanceTextView"
             android:layout_toRightOf="@+id/placeImageView"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="No Rating Yet"
-            android:textSize="16sp" />
+            android:textSize="13sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 </LinearLayout>

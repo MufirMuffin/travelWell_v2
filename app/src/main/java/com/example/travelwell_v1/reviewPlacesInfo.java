@@ -1,7 +1,11 @@
 package com.example.travelwell_v1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +25,8 @@ public class reviewPlacesInfo extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private ListView userReviewList;
     private List<Review> reviewList;
-
+    private DatabaseReference reviewsRef;
+    private Button newReviewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +35,14 @@ public class reviewPlacesInfo extends AppCompatActivity {
 
         userReviewList = findViewById(R.id.userReviewList);
         reviewList = new ArrayList<>();
-
+        newReviewBtn = findViewById(R.id.newReviewBtn);
 
         // Retrieve the user ID from SharedPreferences
         sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE);
         String loggedInUser = getLoggedInUser();
 
-        //
-        DatabaseReference reviewsRef = FirebaseDatabase.getInstance().getReference().child("reviews");
+        //Review
+        reviewsRef = FirebaseDatabase.getInstance().getReference().child("reviews");
         reviewsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -61,8 +66,32 @@ public class reviewPlacesInfo extends AppCompatActivity {
             }
         });
 
+        userReviewList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the position
+                Review clickedReview = reviewList.get(position);
+
+                // Redirect to ReviewActivity to update the review
+                Intent intent = new Intent(reviewPlacesInfo.this, ReviewActivity.class);
+                intent.putExtra("reviewID", clickedReview.getReviewID());
+                intent.putExtra("userID", clickedReview.getUserID());
+                intent.putExtra("rating", clickedReview.getRating());
+                intent.putExtra("comment", clickedReview.getComment());
+                startActivity(intent);
+            }
+        });
+
+        newReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(reviewPlacesInfo.this, userAddReview.class);
+                startActivity(intent);
+            }
+        });
     }
-    //sharedPreferences
+
+    // Shared Preferences
     private String getLoggedInUser() {
         return sharedPreferences.getString("loggedInUser", "");
     }

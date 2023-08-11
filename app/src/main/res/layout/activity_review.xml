@@ -58,8 +58,32 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/commentEditText"
         android:layout_marginTop="16dp"
-        android:text="Submit Review"
+        android:text="Update Review"
         android:textColor="@android:color/white"
         android:gravity="center"/>
 
+    <Button
+        android:id="@+id/deleteReviewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submitReviewButton"
+        android:layout_marginTop="16dp"
+        android:text="Delete Review"
+        android:textColor="@android:color/white"
+        android:gravity="center"/>
+
+    <!--
+    <TextView
+        android:background="@drawable/white_background"
+        android:id="@+id/textViewPlaceID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deleteReviewButton"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="Place ID"
+        android:gravity="center_horizontal"/>
+-->
 </RelativeLayout>

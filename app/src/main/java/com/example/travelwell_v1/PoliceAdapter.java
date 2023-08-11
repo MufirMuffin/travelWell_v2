@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 public class PoliceAdapter extends ArrayAdapter<Polices> {
 
@@ -30,6 +31,7 @@ public class PoliceAdapter extends ArrayAdapter<Polices> {
         ImageView policeImageView = listItemView.findViewById(R.id.policeImageView);
         TextView policeNameTextView = listItemView.findViewById(R.id.policeNameTextView);
         TextView policeDescTextView = listItemView.findViewById(R.id.policeDescTextView);
+        TextView distanceTextView = listItemView.findViewById(R.id.distanceTextView); // Add this line for the distance
 
         // Check if the image path is empty or null
         if (currentPolice.getImage() != null && !currentPolice.getImage().isEmpty()) {
@@ -38,6 +40,7 @@ public class PoliceAdapter extends ArrayAdapter<Polices> {
 
         policeNameTextView.setText(currentPolice.getName());
         policeDescTextView.setText(currentPolice.getDescription());
+        distanceTextView.setText(String.format(Locale.getDefault(), "%.2f km", currentPolice.getDistance())); // Set the distance with formatting
 
         return listItemView;
     }
